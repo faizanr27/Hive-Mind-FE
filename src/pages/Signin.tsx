@@ -3,7 +3,7 @@ import { Button } from "../components/Button";
 import { Input } from "../components/Input";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 export function Signin() {
   const emailRef = useRef<HTMLInputElement>();
@@ -30,7 +30,7 @@ export function Signin() {
         </div>
         <div className="bg-black/20 border border-gray-400/20  rounded-lg shadow-xl p-6 w-96 max-w-[90vw] z-10  min-w-48 min-h-72">
           <div className="flex flex-col justify-center items-center">
-            <Input reference={emailRef} placeholder="Username" />
+            <Input reference={emailRef} placeholder="Email" />
             <Input reference={passwordRef} placeholder="Password" />
           </div>
           <div className="flex justify-center pt-4">
@@ -42,6 +42,7 @@ export function Signin() {
               fullWidth={true}
             />
           </div>
+          <Link to="/signup" ><p className="text-gray-500 mt-2">Don't have an account? <span className="hover:text-slate-700">Sign up</span></p></Link>
         </div>
       </div>
     </div>
