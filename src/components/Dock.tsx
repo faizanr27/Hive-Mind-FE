@@ -1,6 +1,8 @@
-import React, { useState } from 'react';
-import { Home,  LucideTwitter, Youtube, Link, PlusIcon } from 'lucide-react';
+import React, { useState,useEffect } from 'react';
+import { Home,  LucideTwitter, Youtube, Link, PlusIcon, PowerCircle } from 'lucide-react';
 import { CreateContentModal } from './ContentModal';
+import { useContent } from "../hooks/useContent"
+import { useNavigate } from "react-router-dom";
 
 interface DockItemProps {
   icon: React.ReactNode;
@@ -39,13 +41,30 @@ const DockItem: React.FC<DockItemProps> = ({ icon, label, isHovered, onHover, on
 const Dock: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const [shareModalOpen, setShareModalOpen] = useState(false);
+  const {contents, refresh} = useContent();
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    navigate("/signin")
+  }
+
+  const handleShare = () => {
+
+  }
+
+    useEffect(() => {
+      refresh();
+    }, [modalOpen])
 
   const dockItems = [
     { icon: <Home size={14} className="text-gray-100" />, label: 'Home' },
     { icon: <LucideTwitter size={14} className="text-gray-100"/>, label: 'Twitter' },
     { icon: <Youtube size={14} className="text-gray-100" />, label: 'Youtube' },
-    { icon: <Link size={14} className="text-gray-100" />, label: 'Links' },
+    { icon: <Link size={14} className="text-gray-100" />, label: 'share', onClick: () => handleShare() },
     { icon: <PlusIcon size={14} className="text-gray-100" />, label: 'Add content', onClick: () => setModalOpen(!modalOpen) },
+    { icon: <PowerCircle size={14} className="text-gray-100" />, label: 'Logout', onClick: () => handleLogout() },
   ];
 
   return (

@@ -1,78 +1,53 @@
-import React, { useState } from "react";
+import { useRef } from "react";
+import { Button } from "../components/Button";
+import { Input } from "../components/Input";
+import axios from "axios";
+import { BACKEND_URL } from "../config";
+import { useNavigate } from "react-router-dom";
 
-const SignUp: React.FC = () => {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
+export function Signup() {
+  const usernameRef = useRef<HTMLInputElement>();
+  const emailRef = useRef<HTMLInputElement>();
+  const passwordRef = useRef<HTMLInputElement>();
+  const navigate = useNavigate();
 
-  const handleSignUp = (e: React.FormEvent) => {
-    e.preventDefault();
-    console.log({ name, email, password });
-  };
+  async function signup() {
+    const name = usernameRef.current?.value;
+    console.log(usernameRef.current);
+    const email = emailRef.current?.value;
+    const password = passwordRef.current?.value;
+    await axios.post(BACKEND_URL + "/signup", {
+      name,
+      email,
+      password,
+    });
+    navigate("/dashboard");
+    alert("You have signed up!");
+  }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md bg-white p-6 rounded shadow-md">
-        <h2 className="text-2xl font-bold mb-4">Sign Up</h2>
-        <form onSubmit={handleSignUp}>
-          <div className="mb-4">
-            <label htmlFor="name" className="block text-sm font-medium mb-2">
-              Name
-            </label>
-            <input
-              type="text"
-              id="name"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
+    <div className="absolute inset-0 min-h-screen dotted-background overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-tl from-black via-neutral-950 to-transparent flex justify-center items-center">
+        <div className="absolute bottom-56 right-[200px] w-36 h-[1000px] rotate-45 ">
+          <div className="w-full h-full bg-gradient-to-t to-slate-600/20 via-slate-600/30 from-transparent rounded-tl-[800px] rounded-tr-[800px] blur-2xl " />
+        </div>
+        <div className="bg-black/20 border border-gray-400/20  rounded-lg shadow-xl p-6 w-96 max-w-[90vw] z-10  min-w-48 min-h-72">
+          <div className="flex flex-col justify-center items-center">
+            <Input reference={usernameRef} placeholder="Username" />
+            <Input reference={emailRef} placeholder="Email" />
+            <Input reference={passwordRef} placeholder="Password" />
+          </div>
+          <div className="flex justify-center pt-4">
+            <Button
+              onClick={signup}
+              loading={false}
+              variant="primary"
+              text="Signup"
+              fullWidth={true}
             />
           </div>
-          <div className="mb-4">
-            <label htmlFor="email" className="block text-sm font-medium mb-2">
-              Email
-            </label>
-            <input
-              type="email"
-              id="email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <div className="mb-6">
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium mb-2"
-            >
-              Password
-            </label>
-            <input
-              type="password"
-              id="password"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              className="w-full px-4 py-2 border rounded-md focus:outline-none focus:ring-2 focus:ring-blue-500"
-              required
-            />
-          </div>
-          <button
-            type="submit"
-            className="w-full bg-blue-500 text-white py-2 rounded-md hover:bg-blue-600 transition"
-          >
-            Sign Up
-          </button>
-        </form>
-        <p className="mt-4 text-sm text-center">
-          Already have an account?{" "}
-          <a href="/signin" className="text-blue-500 hover:underline">
-            Sign In
-          </a>
-        </p>
+        </div>
       </div>
     </div>
   );
-};
-
-export default SignUp;
+}
