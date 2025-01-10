@@ -41,8 +41,8 @@ const DockItem: React.FC<DockItemProps> = ({ icon, label, isHovered, onHover, on
 const Dock: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
-  const [shareModalOpen, setShareModalOpen] = useState(false);
-  const {contents, refresh} = useContent();
+
+  const { refresh} = useContent();
   const navigate = useNavigate();
 
   const handleLogout = () => {

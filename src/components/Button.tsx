@@ -4,7 +4,7 @@ interface ButtonProps {
     variant: "primary" | "secondary";
     text: string;
     startIcon?: ReactElement;
-    onClick?: () => void;
+    onClick?: (e:any) => void;
     fullWidth?: boolean;
     loading?: boolean;
 }

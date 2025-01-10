@@ -10,7 +10,7 @@ enum ContentType {
   Twitter = "twitter",
 }
 
-export function CreateContentModal({ open, onClose }) {
+export function CreateContentModal({ open, onClose }: any) {
   const titleRef = useRef<HTMLInputElement>();
   const linkRef = useRef<HTMLInputElement>();
   const [type, setType] = useState(ContentType.Youtube);
