@@ -1,16 +1,10 @@
-import { useEffect, useState } from "react"
-import { Button } from "../components/Button"
+import { useEffect } from "react"
 import { Card } from "../components/Card"
-import { PlusIcon } from "../icons/PlusIcon"
-import { ShareIcon } from "../icons/ShareIcon"
 import { useContent } from "../hooks/useContent"
-import { BACKEND_URL } from "../config"
-import axios from "axios"
 import Dock from "../components/Dock"
 
 export function Dashboard() {
-  const [modalOpen, setModalOpen] = useState(false);
-  const { contents, refresh, error } = useContent();
+  const { contents, refresh } = useContent();
 
   useEffect(() => {
     refresh();
