@@ -14,7 +14,7 @@ export function Signin() {
     const email = emailRef.current?.value;
     console.log(emailRef.current);
     const password = passwordRef.current?.value;
-    const response = await axios.post(BACKEND_URL + "/login", {
+    const response = await axios.post(BACKEND_URL + "/auth/login", {
       email,
       password,
     }, {
