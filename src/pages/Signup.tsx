@@ -16,7 +16,7 @@ export function Signup() {
     console.log(usernameRef.current);
     const email = emailRef.current?.value;
     const password = passwordRef.current?.value;
-    await axios.post(BACKEND_URL + "/signup", {
+    await axios.post(BACKEND_URL + "/auth/signup", {
       name,
       email,
       password,
