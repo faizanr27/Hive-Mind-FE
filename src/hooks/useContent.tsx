@@ -21,7 +21,7 @@ interface Content {
           return;
         }
   
-        await axios.get(`${BACKEND_URL}/Content`, {
+        await axios.get(`${BACKEND_URL}/api/Content`, {
           headers: {
             "Authorization": token,
           },
