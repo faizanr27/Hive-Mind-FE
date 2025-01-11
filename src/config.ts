@@ -1,1 +1,1 @@
-export const BACKEND_URL = "https://hivee-mind-backend.vercel.app/api"
+export const BACKEND_URL = "hive-mind-production.up.railway.app/api"
