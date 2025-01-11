@@ -17,7 +17,12 @@ export function Signin() {
     const response = await axios.post(BACKEND_URL + "/login", {
       email,
       password,
-    });
+    }, {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
+    
     const jwt = response.data.token;
     localStorage.setItem("token", jwt);
     navigate("/dashboard");
