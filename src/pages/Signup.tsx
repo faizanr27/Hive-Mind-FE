@@ -20,7 +20,11 @@ export function Signup() {
       name,
       email,
       password,
-    });
+    }, {
+  headers: {
+    'Content-Type': 'application/json',
+  },
+});
     navigate("/dashboard");
     alert("You have signed up!");
   }
