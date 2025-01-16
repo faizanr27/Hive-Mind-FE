@@ -29,7 +29,7 @@ const FeaturesSection = () => {
   ];
 
   return (
-    <div className="px-6 py-24 text-white max-w-7xl mx-auto ">
+    <div className="px-6 py-24 text-white max-w-7xl mx-auto min-h-max">
         <div className=" flex flex-col h-[70vh] justify-center mt-44 xxs:mt-0 ">
       <motion.h2
         initial={{ opacity: 0, y: 30 }}

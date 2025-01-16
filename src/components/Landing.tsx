@@ -3,6 +3,7 @@ import { CursorSpotlight } from "./Landing Components/CursorSpotlight";
 import FeaturesSection from "./Landing Components/Features";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
+import Footer from "./Landing Components/Footer";
 
 const MotionButton = motion.create(Button);
 
@@ -65,8 +66,11 @@ export function Landing() {
             />
           </div>
         </div>
-        <div className="bg-gradient-to-bl from-black via-neutral-950 to-transparent">
+        <div className="bg-gradient-to-bl from-black via-neutral-950 to-transparent min-h-max">
           <FeaturesSection />
+        </div>
+        <div className="bg-gradient-to-tl from-black/90 via-neutral-950/90 to-zinc-950/60">
+          <Footer/>
         </div>
       </div>
     </div>
