@@ -1,22 +1,27 @@
 import { motion } from "motion/react";
+import { Search, Folder, Cloud, Shield } from "lucide-react";
 
 const FeaturesSection = () => {
   const features = [
     {
+      img: <Search />,
       title: "Smart Search",
       description:
         "Find exactly what you need with AI-powered embeddings and vector databases.",
     },
     {
+      img: <Folder />,
       title: "Intuitive Organization",
       description:
         "Easily categorize notes, ideas, and files for quick access.",
     },
     {
+      img: <Cloud />,
       title: "Accessible Anywhere",
       description: "Your knowledge, always at your fingertips—anytime, anywhere.",
     },
     {
+      img: <Shield />,
       title: "Privacy First",
       description:
         "Your data stays yours with top-notch encryption and security.",
@@ -46,8 +51,8 @@ const FeaturesSection = () => {
               transition={{ delay: 0.3 * index, duration: 0.4 }}
               className="p-6 bg-gradient-to-tl from-zinc-800 via-neutral-950 to-transparent rounded-2xl border border-zinc-600/20"
             >
-              <div className="w-12 h-12 rounded-full bg-gray-800 flex items-center justify-center mb-4">
-                {/* <img src={feature.img} /> */}
+              <div className="w-12 h-12 rounded-full flex items-center justify-center mb-4 -ml-3">
+                {feature.img}
               </div>
               <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
               <p className="text-gray-400">{feature.description}</p>
