@@ -28,7 +28,7 @@ export function Landing() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: 0.6, duration: 1 }}
-              className=" bg-gradient-to-br from-zinc-300 via-zinc-600 to-zinc-900 bg-clip-text text-transparent text-8xl font-semibold"
+              className="ml-2 xxs:ml-0 bg-gradient-to-br from-zinc-300 via-zinc-600 to-zinc-900 bg-clip-text text-transparent text-8xl font-semibold"
             >
               Hive Mind
             </motion.h1>
@@ -40,13 +40,13 @@ export function Landing() {
               whileInView={{ opacity: 1 }}
               viewport={{ once: true }}
               transition={{ delay: 0.8, duration: 1 }}
-              className="text-start text-sm p-2 bg-gradient-to-br from-zinc-300 via-zinc-600 to-zinc-900 bg-clip-text text-transparent xxs:text-2xl xxs:text-center font-semibold translate-y-[50]"
+              className="ml-2 xxs:ml-0 text-start text-sm p-2 bg-gradient-to-br from-zinc-300 via-zinc-600 to-zinc-900 bg-clip-text text-transparent xxs:text-2xl xxs:text-center font-semibold translate-y-[50]"
             >
               Your personal knowledge hub to store, organize, and retrieve ideas
               effortlessly.
             </motion.p>
           </div>
-          <div className="flex flex-row gap-4 justify-start items-start">
+          <div className="flex flex-row gap-4 justify-start xxs:justify-center items-start sm:items-center w-full px-4 sm:px-8">
             <Link to="/signup">
             <MotionButton 
             variant="primary" 
