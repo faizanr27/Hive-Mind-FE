@@ -40,7 +40,7 @@ export function Card({title, link, type}: CardProps) {
                         <div className="text-gray-500 pr-2">
                             {type == "twitter" ? <TwitterIcon/> : <YoutubeIcon/>}
                         </div>
-                        <p className='text-gray-500 font-semibold text-lg'>{title}</p>
+                        <p className='text-gray-500 font-semibold text-md'>{title}</p>
                     </div>
                     <div className="flex items-center">
                         <div className="pr-2 text-gray-500">
