@@ -10,7 +10,7 @@ interface CardProps {
     type: "twitter" | "youtube";
 }
 
-export function Card({title, link, type}: CardProps) {
+export function Card({link, type}: CardProps) {
     useEffect(() => {
         // Load Twitter widgets script
         if (type === "twitter") {
