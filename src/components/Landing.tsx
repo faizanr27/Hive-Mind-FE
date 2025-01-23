@@ -47,18 +47,18 @@ export function Landing() {
             </motion.p>
           </div>
           <div className="flex flex-row gap-4 justify-start xxs:justify-center items-start sm:items-center w-full px-4 sm:px-8">
-            <Link to="/signup">
-            <MotionButton 
-            variant="primary" 
+            <Link to="/signin">
+            <MotionButton
+            variant="primary"
             text="Get Started"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
             transition={{ delay: 1.1, duration: 1.5 }}
             /></Link>
-            <MotionButton 
-            variant="secondary" 
-            text="Learn More" 
+            <MotionButton
+            variant="secondary"
+            text="Learn More"
             initial={{ opacity: 0 }}
             whileInView={{ opacity: 1 }}
             viewport={{ once: true }}
