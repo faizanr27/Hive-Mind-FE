@@ -5,7 +5,7 @@ import { checkAuthStatus, loginUser, logoutUser } from '../helpers/communicator'
 type User = {
   email: string;
 }
-
+console.log(BACKEND_URL)
 interface AuthContextType {
   loginWithGoogle: () => void;
   loginWithGithub: () => void;
