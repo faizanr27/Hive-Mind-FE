@@ -1,8 +1,8 @@
-import React, { useState,useEffect } from 'react';
+import React, { useState } from 'react';
 import { Home,  LucideTwitter, Youtube, Link, PlusIcon, PowerCircle } from 'lucide-react';
 import { CreateContentModal } from './ContentModal';
-import { useContent } from "../hooks/useContent"
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
+import {useAuth} from '../context/AuthContext'
 
 interface DockItemProps {
   icon: React.ReactNode;
@@ -21,7 +21,7 @@ const DockItem: React.FC<DockItemProps> = ({ icon, label, isHovered, onHover, on
       onClick={onClick}
     >
       <div
-        className={`p-3 rounded-xl bg-gray-800/20 backdrop-blur-md border border-gray-700/50 
+        className={`p-3 rounded-xl bg-gray-800/20 backdrop-blur-md border border-gray-700/50
           transition-all duration-200 group-hover:bg-gray-700/80 shadow-lg
           ${isHovered ? 'scale-125 -translate-y-4' : 'scale-100'}`}
       >
@@ -41,22 +41,18 @@ const DockItem: React.FC<DockItemProps> = ({ icon, label, isHovered, onHover, on
 const Dock: React.FC = () => {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
   const [modalOpen, setModalOpen] = useState(false);
+  const {logout} = useAuth()
 
-  const { refresh} = useContent();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
-  const handleLogout = () => {
-    localStorage.removeItem("token")
-    navigate("/signin")
-  }
+  // const handleLogout = () => {
+  //   localStorage.removeItem("token")
+  //   navigate("/signin")
+  // }
 
   const handleShare = () => {
 
   }
-
-    useEffect(() => {
-      refresh();
-    }, [modalOpen])
 
   const dockItems = [
     { icon: <Home size={14} className="text-gray-100" />, label: 'Home' },
@@ -64,7 +60,7 @@ const Dock: React.FC = () => {
     { icon: <Youtube size={14} className="text-gray-100" />, label: 'Youtube' },
     { icon: <Link size={14} className="text-gray-100" />, label: 'share', onClick: () => handleShare() },
     { icon: <PlusIcon size={14} className="text-gray-100" />, label: 'Add content', onClick: () => setModalOpen(!modalOpen) },
-    { icon: <PowerCircle size={14} className="text-gray-100" />, label: 'Logout', onClick: () => handleLogout() },
+    { icon: <PowerCircle size={14} className="text-gray-100" />, label: 'Logout', onClick: () => logout() },
   ];
 
   return (

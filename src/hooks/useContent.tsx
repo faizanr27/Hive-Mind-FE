@@ -1,53 +1,31 @@
+import useSWR from "swr";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { BACKEND_URL } from "../config";
+// import { useAuth} from "../context/AuthContext"
 
 interface Content {
-    type:  "twitter" | "youtube";
-    link: string;
-    title: string;
-  }
+  type: "twitter" | "youtube";
+  link: string;
+  title: string;
+}
 
+const fetcher = async (url: string) => {
 
-  export function useContent() {
-    const [contents, setContents] = useState<Content[]>([]);
-    const [error, setError] = useState<string | null>(null);
-  
-    const refresh = async () => {
-      try {
-        const token = localStorage.getItem("token");
-        if (!token) {
-          setError("No authentication token found");
-          return;
-        }
-  
-        await axios.get(`${BACKEND_URL}/Content`, {
-          headers: {
-            "Authorization": token,
-          },
-        })
+  console.log("called")
+  const response = await axios.get(url);
+  return response.data.userContent || [];
+};
 
-            .then((response) => {
-                console.log(response.data)
-                setContents(response.data.userContent || [])
-            })
-        setError(null);  
-      } catch (error) {
-        setError("Failed to fetch content");
-        console.error(error);
-      }
-    };
-  
-    useEffect(() => {
-      refresh();
-      const interval = setInterval(() => {
-        refresh();
-      }, 10 * 1000);
-  
-      return () => {
-        clearInterval(interval);
-      };
-    }, []);  
-  
-    return { contents, refresh, error };
-  }
+export function useContent() {
+  const { data, error, mutate } = useSWR(`${BACKEND_URL}/Content`, fetcher, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: true,
+    refreshInterval: 0,
+  });
+
+  return {
+    contents: data as Content[] || [],
+    error,
+    refresh: mutate,
+  };
+}

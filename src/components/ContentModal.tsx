@@ -4,13 +4,15 @@ import { Button } from "./Button";
 import { Input } from "./Input";
 import { BACKEND_URL } from "../config";
 import axios from "axios";
+import { useContent } from "../hooks/useContent";
 
 enum ContentType {
   Youtube = "youtube",
   Twitter = "twitter",
 }
 
-export function CreateContentModal({ open, onClose }: any) {
+export function CreateContentModal({ open, onClose}: any) {
+  const { refresh } = useContent();
   const titleRef = useRef<HTMLInputElement>();
   const linkRef = useRef<HTMLInputElement>();
   const [type, setType] = useState(ContentType.Youtube);
@@ -25,15 +27,11 @@ export function CreateContentModal({ open, onClose }: any) {
         link,
         title,
         type,
-      },
-      {
-        headers: {
-          Authorization: localStorage.getItem("token"),
-        },
-      }
-    );
+      });
 
     onClose();
+    refresh();
+
   }
 
   return (

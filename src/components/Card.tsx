@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { ShareIcon } from "../icons/ShareIcon";
-import { Trash2Icon } from 'lucide-react';
-import { TwitterIcon } from '../icons/TwitterIcon';
-import { YoutubeIcon } from '../icons/YoutubeIcon';
+// import { ShareIcon } from "../icons/ShareIcon";
+// import { Trash2Icon } from 'lucide-react';
+// import { TwitterIcon } from '../icons/TwitterIcon';
+// import { YoutubeIcon } from '../icons/YoutubeIcon';
 
 interface CardProps {
     title: string;
@@ -33,16 +33,16 @@ export function Card({title, link, type}: CardProps) {
     };
 
     return (
-      <div>
-        <div className="p-4 bg-slate-600/20 backdrop-blur-sm rounded-xl max-w-72 min-h-48 min-w-72">
+
+        <div className="rounded-xl max-w-min max-h-40 min-h-min min-w-72">
           <div className="flex justify-between">
-            <div className="flex items-center text-md">
+            {/* <div className="flex items-center text-md">
               <div className="text-gray-500 pr-2">
                 {type == "twitter" ? <TwitterIcon /> : <YoutubeIcon />}
               </div>
               <p className="text-gray-500 font-semibold text-md">{title}</p>
-            </div>
-            <div className="flex items-center">
+            </div> */}
+            {/* <div className="flex items-center">
               <div className="pr-2 text-gray-500">
                 <a href={link} target="_blank" rel="noopener noreferrer">
                   <ShareIcon />
@@ -51,10 +51,10 @@ export function Card({title, link, type}: CardProps) {
               <div className="text-gray-500">
                 <Trash2Icon />
               </div>
-            </div>
+            </div> */}
           </div>
 
-          <div className="pt-4">
+          <div className="rounded-2xl">
             {type === "youtube" && (
               <iframe
                 className="w-full h-full rounded-md object-fill"
@@ -72,6 +72,5 @@ export function Card({title, link, type}: CardProps) {
             )}
           </div>
         </div>
-      </div>
     );
 }
