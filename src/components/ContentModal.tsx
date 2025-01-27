@@ -6,14 +6,14 @@ import { BACKEND_URL } from "../config";
 import axios from "axios";
 import { useContent } from "../hooks/useContent";
 import {
-  CirclePlus,
-  File,
+  // CirclePlus,
+  // File,
   FileIcon,
-  Link,
+  // Link,
   Merge,
-  NotebookIcon,
+  // NotebookIcon,
   Globe,
-  NotebookPenIcon,
+  // NotebookPenIcon,
   Youtube
 } from "lucide-react";
 
