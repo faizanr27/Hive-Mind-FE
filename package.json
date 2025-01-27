@@ -10,6 +10,10 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/lab": "^6.0.0-beta.24",
+    "@mui/material": "^6.4.1",
     "@radix-ui/react-checkbox": "^1.1.3",
     "@radix-ui/react-label": "^2.1.1",
     "@radix-ui/react-select": "^2.1.4",
@@ -27,6 +31,7 @@
     "react-router-dom": "^7.1.3",
     "swr": "^2.3.0",
     "tailwind-merge": "^2.6.0",
+    "tailwind-scrollbar": "^3.1.0",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {

@@ -31,18 +31,6 @@ export const signUpUser = async (
     return data;
 }
 
-export const logoutUser = async () => {
-    const res = await axios.get(`${BACKEND_URL}/auth/logout`);
-
-    if (res.status != 200) {
-        throw new Error("Logout failed");;
-    }
-
-    const data = await res.data;
-    localStorage.removeItem('userID')
-    return data;
-
-  };
 
 
 export const checkAuthStatus = async () => {

@@ -7,6 +7,7 @@ interface Content {
   type: "twitter" | "youtube";
   link: string;
   title: string;
+  _id: string;
 }
 
 const fetcher = async (url: string) => {
