@@ -19,6 +19,19 @@ body {
   margin: 0;
   padding: 0;
 }
+.custom-scrollbar::-webkit-scrollbar {
+  height: 8px; /* Adjust the height for horizontal scrollbars */
+}
+
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: #202020; /* Thumb color */
+  border-radius: 4px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #696969; /* Thumb hover color */
+}
 @layer base {
   :root {
     --background: 0 0% 100%;

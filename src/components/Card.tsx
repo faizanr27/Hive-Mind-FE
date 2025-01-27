@@ -5,12 +5,12 @@ import { useEffect } from 'react';
 // import { YoutubeIcon } from '../icons/YoutubeIcon';
 
 interface CardProps {
-    title: string;
     link: string;
     type: "twitter" | "youtube";
+    className?: string;
 }
 
-export function Card({link, type}: CardProps) {
+export function Card({link, type }: CardProps) {
     useEffect(() => {
         // Load Twitter widgets script
         if (type === "twitter") {
@@ -34,26 +34,7 @@ export function Card({link, type}: CardProps) {
 
     return (
 
-        <div className="rounded-xl max-w-min max-h-40 min-h-min min-w-72">
-          <div className="flex justify-between">
-            {/* <div className="flex items-center text-md">
-              <div className="text-gray-500 pr-2">
-                {type == "twitter" ? <TwitterIcon /> : <YoutubeIcon />}
-              </div>
-              <p className="text-gray-500 font-semibold text-md">{title}</p>
-            </div> */}
-            {/* <div className="flex items-center">
-              <div className="pr-2 text-gray-500">
-                <a href={link} target="_blank" rel="noopener noreferrer">
-                  <ShareIcon />
-                </a>
-              </div>
-              <div className="text-gray-500">
-                <Trash2Icon />
-              </div>
-            </div> */}
-          </div>
-
+        <div className="rounded-xl">
           <div className="rounded-2xl">
             {type === "youtube" && (
               <iframe

@@ -2,6 +2,9 @@
 export default {
     darkMode: ['class'],
     content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+		variants: {
+			scrollbar: ['rounded'],
+		},
   theme: {
   	extend: {
   		screens: {
@@ -60,6 +63,6 @@ export default {
   		}
   	}
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [ require('tailwind-scrollbar'),require("tailwindcss-animate")],
 }
 

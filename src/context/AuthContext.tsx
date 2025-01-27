@@ -1,11 +1,12 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { BACKEND_URL } from "../config";
-import { checkAuthStatus, loginUser, logoutUser } from '../helpers/communicator'
+import { checkAuthStatus, loginUser } from '../helpers/communicator'
+import axios from 'axios'
 
 type User = {
   email: string;
 }
-console.log(BACKEND_URL)
+
 interface AuthContextType {
   loginWithGoogle: () => void;
   loginWithGithub: () => void;
@@ -19,6 +20,7 @@ interface AuthContextType {
     password:string
   )=>void;
   logout: () => void;
+  loggingOut: boolean;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -26,6 +28,7 @@ const AuthContext = createContext<AuthContextType | undefined>(undefined);
 export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   // const [token, setToken] = useState<string | null>(localStorage.getItem("token"));
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [loggingOut, setLoggingOut] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState(true);
 
@@ -44,7 +47,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
         console.error("Error checking auth status:", error);
         setIsAuthenticated(false);
       } finally {
-        setLoading(false); // Ensure loading is set to false after the check
+        setLoading(false);
       }
     }
 
@@ -72,11 +75,33 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   }
   };
 
-  const logout = () => {
-    logoutUser();
-    setIsAuthenticated(false);
-    setUser(null);
+  const logout = async() => {
+    setLoggingOut(true);
+    try {
+      const res = await axios.get(`${BACKEND_URL}/auth/logout`, {
+        withCredentials: true,
+      });
+
+      if (res.status !== 200) {
+        throw new Error("Logout failed");
+      }
+
+      localStorage.removeItem("userID")
+      setIsAuthenticated(false);
+      setUser(null);
+
+      return res.data;
+    } catch (error) {
+      console.error("Logout error:", error);
+      setIsAuthenticated(false);
+      setUser(null);
+      throw error;
+    }
+    finally {
+      setLoggingOut(false);
+    }
   };
+
 
   const value = {
     user,
@@ -86,6 +111,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     logout,
     loginWithGoogle,
     loginWithGithub,
+    loggingOut,
 
 };
 

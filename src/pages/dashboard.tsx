@@ -1,13 +1,20 @@
 import { Card } from "../components/Card";
 import { useContent } from "../hooks/useContent";
 import Dock from "../components/Dock";
-
+import Masonry from '@mui/lab/Masonry';
+import Box from '@mui/material/Box';
 
 export function Dashboard() {
-  const { contents, error } = useContent();
-  console.log(contents)
+  const { contents = [], error } = useContent();
 
-  if (error) return <p className="flex justify-center items-center text-2xl text-white h-screen w-screen">Error: {error.message}</p>;
+  console.log(contents)
+  if (error) {
+    return (
+      <div className="flex justify-center items-center h-screen w-screen">
+        <p className="text-2xl text-white">Error: {error.message}</p>
+      </div>
+    );
+  }
 
   return (
     <div className="absolute inset-0 min-h-screen dotted-background overflow-x-hidden">
@@ -17,21 +24,27 @@ export function Dashboard() {
         </div>
 
         {contents.length > 0 ? (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 p-4 mt-10 max-w-max mx-auto">
-          {contents.map(({ type, link, title }, index) => (
-            <Card  key={index} type={type} link={link} title={title} />
-          ))}
-          </div>
-        ) : (
-          <p className="flex justify-center items-center text-2xl text-white h-screen w-screen">
-            No content available.
-          </p>
-        )}
+            <div className="pl-2 max-w-[1280px] mx-auto">
+            <Box sx={{ width: "100%" }}>
+            <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>
+                {contents.map((item) => (
+                  <div key={item._id} style={{ minHeight: "100px" }}>
+                    <Card type={item.type} link={item.link}/>
+                  </div>
+                ))}
+              </Masonry>
+            </Box>
+            </div>
+          ) : (
+            <div className="flex justify-center items-center h-screen w-screen">
+              <p className="text-2xl text-white">No content available.</p>
+            </div>
+          )}
 
-        <div>
-          <Dock />
-        </div>
+        <Dock />
       </div>
     </div>
   );
 }
+
+export default Dashboard;
