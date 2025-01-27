@@ -3,9 +3,11 @@ import { useContent } from "../hooks/useContent";
 import Dock from "../components/Dock";
 import Masonry from '@mui/lab/Masonry';
 import Box from '@mui/material/Box';
+import {useAuth} from '../context/AuthContext'
 
 export function Dashboard() {
   const { contents = [], error } = useContent();
+  const {name} = useAuth()
 
   console.log(contents)
   if (error) {
@@ -25,6 +27,9 @@ export function Dashboard() {
 
         {contents.length > 0 ? (
             <div className="pl-2 max-w-[1280px] mx-auto">
+              <h1 className="ml-2 mb-2 xxs:ml-0 bg-gradient-to-br from-zinc-300 via-zinc-600 to-zinc-900 bg-clip-text text-transparent text-6xl mt-4 font-semibold" >
+              Welcome {name}
+            </h1>
             <Box sx={{ width: "100%" }}>
             <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>
                 {contents.map((item) => (

@@ -14,6 +14,7 @@ interface AuthContextType {
   // setToken: (token: string | null) => void;
   isAuthenticated: boolean;
   user: User | null;
+  name: string | null;
   loading: boolean;
   login:(
     email:string,
@@ -30,6 +31,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loggingOut, setLoggingOut] = useState(false);
   const [user, setUser] = useState<User | null>(null);
+  const [name, setName] = useState<string | null>(null)
   const [loading, setLoading] = useState(true);
 
   useEffect(()=>{
@@ -41,6 +43,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
           setIsAuthenticated(false);
         } else {
           setUser({ email: data.email });
+          setName(data.username)
           setIsAuthenticated(true);
         }
       } catch (error) {
@@ -112,6 +115,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     loginWithGoogle,
     loginWithGithub,
     loggingOut,
+    name,
 
 };
 
