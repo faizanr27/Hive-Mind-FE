@@ -14,7 +14,8 @@ import {
   // NotebookIcon,
   Globe,
   // NotebookPenIcon,
-  Youtube
+  Youtube,
+  Twitter
 } from "lucide-react";
 
 
@@ -109,6 +110,10 @@ export function CreateContentModal({ open, onClose}: any) {
                   <button className="focus:bg-green-400/40 focus:border focus:border-green-400 text-white/80 p-2 rounded-sm w-44 h-20" onClick={() => setType(ContentType.Youtube)}>
                   <Youtube/>
                     Youtube
+                  </button>
+                  <button className="focus:bg-green-400/40 focus:border focus:border-green-400 text-white/80 p-2 rounded-sm w-44 h-20" onClick={() => setType(ContentType.Twitter)}>
+                  <Twitter/>
+                    Tweets
                   </button>
                   <button className="focus:bg-yellow-400/40 focus:border focus:border-yellow-400 text-white/80 p-2 rounded-sm w-44 h-20" onClick={() => setType(ContentType.Document)}>
                   <FileIcon/>
