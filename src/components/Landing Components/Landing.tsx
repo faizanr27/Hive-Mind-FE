@@ -1,9 +1,9 @@
-import { Button } from "./Button";
-import { CursorSpotlight } from "./Landing Components/CursorSpotlight";
-import FeaturesSection from "./Landing Components/Features";
+import { Button } from "../Button";
+import { CursorSpotlight } from "./CursorSpotlight";
+import FeaturesSection from "./Features";
 import { motion } from "motion/react";
 import { Link } from "react-router-dom";
-import Footer from "./Landing Components/Footer";
+import Footer from "./Footer";
 
 const MotionButton = motion.create(Button);
 
@@ -69,6 +69,8 @@ export function Landing() {
         <div className="bg-gradient-to-bl from-black via-neutral-950 to-transparent min-h-max">
           <FeaturesSection />
         </div>
+
+
         <div className="bg-gradient-to-tl from-black/90 via-neutral-950/90 to-zinc-950/60">
           <Footer/>
         </div>

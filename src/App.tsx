@@ -1,13 +1,17 @@
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import  Dashboard  from "./pages/dashboard";
-import { Landing } from "./components/Landing";
+import { Landing } from "./components/Landing Components/Landing";
 import ProtectedRoute from "./pages/ProtectedRoute";
 import { SignUpPage } from "./components/ui/sign-up";
 import { SignInPage } from "./components/ui/sign-in";
 import { useAuth } from './context/AuthContext';
+import { useEffect } from "react";
 
 function App() {
   const { isAuthenticated } = useAuth();
+  useEffect(() => {
+    document.documentElement.classList.add("dark");
+  }, []);
 
   return (
     <BrowserRouter>

@@ -1,79 +1,37 @@
-import React, { useState } from 'react';
-import { Home,  LucideTwitter, Youtube, Link, PlusIcon, PowerCircle } from 'lucide-react';
-import { CreateContentModal } from './ContentModal';
-// import { useNavigate } from "react-router-dom";
-import {useAuth} from '../context/AuthContext'
+import React, { useState } from "react";
+import { CreateContentModal } from "./ContentModal";
+import { Home, LucideYoutube, File, User2, LucideTwitter, Link, PlusIcon } from "lucide-react";
+import { ExpandedTabs } from "../components/ui/expanded-tabs";
+import ProfilePopover from "./ProfilePopover";
 
-interface DockItemProps {
-  icon: React.ReactNode;
-  label: string;
-  isHovered: boolean;
-  onHover: (isHovered: boolean) => void;
-  onClick?: () => void;
+interface DockProps {
+  setActiveTab: (tab: string) => void;
 }
 
-const DockItem: React.FC<DockItemProps> = ({ icon, label, isHovered, onHover, onClick }) => {
-  return (
-    <div
-      className="relative flex flex-col items-center group"
-      onMouseEnter={() => onHover(true)}
-      onMouseLeave={() => onHover(false)}
-      onClick={onClick}
-    >
-      <div
-        className={`p-3 rounded-xl bg-gray-800/20 backdrop-blur-md border border-gray-700/50
-          transition-all duration-200 group-hover:bg-gray-700/80 shadow-lg
-          ${isHovered ? 'scale-125 -translate-y-4' : 'scale-100'}`}
-      >
-        {icon}
-      </div>
-      <span
-        className={`absolute -bottom-8 px-3 py-1 rounded-lg bg-gray-800 text-gray-100 text-sm
-          shadow-xl border border-gray-700/50 backdrop-blur-md
-          transition-opacity duration-200 ${isHovered ? 'opacity-100' : 'opacity-0'}`}
-      >
-        {label}
-      </span>
-    </div>
-  );
-};
-
-const Dock: React.FC = () => {
-  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
+const Dock: React.FC<DockProps> = ({  setActiveTab }) => {
   const [modalOpen, setModalOpen] = useState(false);
-  const {logout} = useAuth()
+  const [dropdownOpen, setDropdownOpen] = useState(false);
 
-
-  const handleShare = () => {
-
-  }
-
-  const dockItems = [
-    { icon: <Home size={14} className="text-gray-100" />, label: 'Home' },
-    { icon: <LucideTwitter size={14} className="text-gray-100"/>, label: 'Twitter' },
-    { icon: <Youtube size={14} className="text-gray-100" />, label: 'Youtube' },
-    { icon: <Link size={14} className="text-gray-100" />, label: 'share', onClick: () => handleShare() },
-    { icon: <PlusIcon size={14} className="text-gray-100" />, label: 'Add content', onClick: () => setModalOpen(!modalOpen) },
-    { icon: <PowerCircle size={14} className="text-gray-100" />, label: 'Logout', onClick: () => logout() },
+  const tabs = [
+    { title: "Home", icon: Home, onClick: () => setActiveTab("Home") },
+    { title: "Tweets", icon: LucideTwitter, onClick: () => setActiveTab("Twitter") },
+    { title: "Youtube", icon: LucideYoutube, onClick: () => setActiveTab("Youtube") },
+    { title: "Links", icon: Link, onClick: () => setActiveTab("Links") },
+    { title: "Documents", icon: File, onClick: () => setActiveTab("Documents") },
+    { title: "Add memory", icon: PlusIcon, onClick: () => setModalOpen(!modalOpen) },
+    { type: "separator" as const },
+    { title: "Profile", icon: User2, onClick: () => setDropdownOpen(!dropdownOpen) },
   ];
 
   return (
     <>
-    <CreateContentModal open={modalOpen} onClose={() => setModalOpen(false)} />
-    <div className="fixed bottom-4 left-1/2 -translate-x-1/2 ">
-      <div className="flex items-center gap-2 px-5 py-2 rounded-full bg-transparent backdrop-blur-sm border border-gray-800/50 shadow-2xl cursor-pointer">
-        {dockItems.map((item, index) => (
-          <DockItem
-            key={item.label}
-            icon={item.icon}
-            label={item.label}
-            isHovered={hoveredIndex === index}
-            onHover={(isHovered) => setHoveredIndex(isHovered ? index : null)}
-            onClick={item.onClick}
-          />
-        ))}
+      <CreateContentModal open={modalOpen} onClose={() => setModalOpen(false)} />
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 ">
+        <div className="flex items-center gap-2 px-5 py-2 rounded-full shadow-2xl cursor-pointer">
+          <ExpandedTabs tabs={tabs} />
+          <ProfilePopover dropdownOpen={dropdownOpen} />
+        </div>
       </div>
-    </div>
     </>
   );
 };
