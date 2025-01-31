@@ -26,7 +26,7 @@ const Dock: React.FC<DockProps> = ({  setActiveTab }) => {
   return (
     <>
       <CreateContentModal open={modalOpen} onClose={() => setModalOpen(false)} />
-      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 ">
+      <div className="fixed bottom-4 left-1/2 -translate-x-1/2 z-50">
         <div className="flex items-center gap-2 px-5 py-2 rounded-full shadow-2xl cursor-pointer">
           <ExpandedTabs tabs={tabs} />
           <ProfilePopover dropdownOpen={dropdownOpen} />
