@@ -44,6 +44,7 @@ export function Dashboard() {
                 {filteredContents.map((item) => (
                   <div key={item._id} style={{ minHeight: "100px" }}>
                     <Card type={item.type} link={item.link} />
+
                   </div>
                 ))}
               </Masonry>

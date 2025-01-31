@@ -16,7 +16,7 @@ const Dock: React.FC<DockProps> = ({  setActiveTab }) => {
     { title: "Home", icon: Home, onClick: () => setActiveTab("Home") },
     { title: "Tweets", icon: LucideTwitter, onClick: () => setActiveTab("Twitter") },
     { title: "Youtube", icon: LucideYoutube, onClick: () => setActiveTab("Youtube") },
-    { title: "Links", icon: Link, onClick: () => setActiveTab("Links") },
+    { title: "Links", icon: Link, onClick: () => setActiveTab("Website") },
     { title: "Documents", icon: File, onClick: () => setActiveTab("Documents") },
     { title: "Add memory", icon: PlusIcon, onClick: () => setModalOpen(!modalOpen) },
     { type: "separator" as const },

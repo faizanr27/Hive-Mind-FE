@@ -20,7 +20,7 @@ body {
   padding: 0;
 }
 .custom-scrollbar::-webkit-scrollbar {
-  height: 8px; /* Adjust the height for horizontal scrollbars */
+  height: 4px; /* Adjust the height for horizontal scrollbars */
 }
 
 
