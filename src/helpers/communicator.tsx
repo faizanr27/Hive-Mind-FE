@@ -17,19 +17,22 @@ export const loginUser = async (
     return data;
 }
 
-export const signUpUser = async (
-    username:string,
-    password:string
-)=>{
-    const res = await axios.post("/user/signup",{username, password});
-    if(res.status != 201){
-        throw new Error("Unable to Sign Up User.")
+export const signUpUser = async (name: string, email: string, password: string) => {
+    try {
+        const res = await axios.post(`${BACKEND_URL}/auth/signup`, { name, email, password });
+        if (res.status !== 200) {
+            throw new Error("Unable to Sign Up User.");
+        }
+        const data = await res.data;
+        console.log('userID', data.id);
+        localStorage.setItem('userID', data.id);
+        return data;
+    } catch (error: any) {
+        console.error('Signup error:', error);
+        throw new Error(error.message || "Signup failed.");
     }
+};
 
-    const data = await res.data;
-    localStorage.setItem('userID',data.id)
-    return data;
-}
 
 
 

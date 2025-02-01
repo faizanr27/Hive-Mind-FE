@@ -10,8 +10,36 @@ import {
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Icons } from '@/components/ui/icons'
+import { useAuth } from '../../context/AuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function SignUpPage() {
+
+  const { signUp, loginWithGoogle, loginWithGithub } = useAuth();
+  const navigate = useNavigate();
+  const [name, setName] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSignUp = async () => {
+    try {
+        setError(null);
+        console.log({ name, email, password });
+        await signUp(name, email, password);
+        navigate('/dashboard');
+    } catch (err: unknown) {
+        if (err instanceof Error) {
+            setError(err.message);
+            console.log(err.message)
+        } else {
+            setError("An unexpected error occurred.");
+        }
+    }
+};
+
+
   return (
     <div className="flex justify-center items-center min-h-screen">
       <div className="grid w-full grow items-center px-4 sm:justify-center">
@@ -23,28 +51,53 @@ function SignUpPage() {
             </CardDescription>
           </CardHeader>
           <CardContent className="grid gap-y-4">
+          <div className="space-y-2">
+              <Label className="text-gray-400">UserName</Label>
+              <Input
+                type="text"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                required
+              />
+            </div>
 
 
-            <div className="space-y-2">
+          <div className="space-y-2">
               <Label className="text-gray-400">Email address</Label>
-              <Input type="email" required />
+              <Input
+                type="email"
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
+                required
+              />
             </div>
 
             <div className="space-y-2">
               <Label className="text-gray-400">Password</Label>
-              <Input type="password" required />
+              <Input
+                type="password"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                required
+              />
             </div>
+            {error && <p className="text-red-500 text-sm">{error}</p>}
 
             <p className="flex items-center gap-x-3 text-sm text-muted-foreground before:h-px before:flex-1 before:bg-border after:h-px after:flex-1 after:bg-border">
               or
             </p>
 
             <div className="grid grid-cols-2 gap-x-4">
-              <Button size="sm" variant="outline" type="button">
+              <Button size="sm" variant="outline" type="button" onClick={loginWithGithub}>
                 <Icons.gitHub className="mr-2 size-4" />
                 GitHub
               </Button>
-              <Button size="sm" variant="outline" type="button">
+              <Button
+                size="sm"
+                variant="outline"
+                type="button"
+                onClick={loginWithGoogle}
+              >
                 <Icons.google className="mr-2 size-4" />
                 Google
               </Button>
@@ -55,7 +108,7 @@ function SignUpPage() {
 
           <CardFooter>
             <div className="grid w-full gap-y-4">
-              <Button>Continue</Button>
+              <Button onClick={handleSignUp}>Continue</Button>
               <Button variant="link" size="sm" className="text-gray-400" asChild>
                 <a href="/signin" >Already have an account? Sign in</a>
               </Button>

@@ -1,6 +1,6 @@
 import React, { createContext, useContext, useState, useEffect, ReactNode } from "react";
 import { BACKEND_URL } from "../config";
-import { checkAuthStatus, loginUser } from '../helpers/communicator'
+import { checkAuthStatus, loginUser, signUpUser } from '../helpers/communicator'
 import axios from 'axios'
 
 type User = {
@@ -17,6 +17,11 @@ interface AuthContextType {
   name: string | null;
   loading: boolean;
   login:(
+    email:string,
+    password:string
+  )=>void;
+  signUp:(
+    name:string,
     email:string,
     password:string
   )=>void;
@@ -73,7 +78,22 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     const data = await loginUser(email,password);
     setIsAuthenticated(true);
     if(data){
+      console.log(data)
       setUser({email :email})
+      setName(data.name)
+      setIsAuthenticated(true);
+  }
+  };
+  const signUp = async(
+    name:string,
+    email:string,
+    password:string
+  ) => {
+    const data = await signUpUser(name,email,password);
+    setIsAuthenticated(true);
+    if(data){
+      setUser({email :email})
+      setName(data.name)
       setIsAuthenticated(true);
   }
   };
@@ -110,6 +130,7 @@ export const AuthProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     user,
     isAuthenticated,
     login,
+    signUp,
     loading,
     logout,
     loginWithGoogle,
