@@ -18,7 +18,7 @@ const fetcher = async (url: string) => {
 };
 
 export function useContent() {
-  const { data, error, mutate } = useSWR(`${BACKEND_URL}/Content`, fetcher, {
+  const { data, error, mutate } = useSWR(`${BACKEND_URL}/Content/retrieve`, fetcher, {
     revalidateOnFocus: false,
     revalidateOnReconnect: true,
     refreshInterval: 0,

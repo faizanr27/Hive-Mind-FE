@@ -40,7 +40,7 @@ export function CreateContentModal({ open, onClose}: any) {
     const link = linkRef.current?.value;
 
     await axios.post(
-      `${BACKEND_URL}/Content`,
+      `${BACKEND_URL}/Content/generate`,
       {
         link,
         // title,
