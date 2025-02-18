@@ -44,7 +44,7 @@ export function CreateContentModal({ open, onClose}: any) {
       {
         link,
         // title,
-        type,
+        // type,
       });
 
     onClose();
