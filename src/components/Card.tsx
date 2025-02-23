@@ -1,22 +1,15 @@
-import { useEffect, useState } from "react";
-// import { ShareIcon } from "../icons/ShareIcon";
-// import { Trash2Icon } from 'lucide-react';
-// import { TwitterIcon } from '../icons/TwitterIcon';
-// import { YoutubeIcon } from '../icons/YoutubeIcon';
+import { useEffect } from "react";
 
 interface CardProps {
     link: string;
     type: "twitter" | "youtube" | "website" | "Document";
+    title?: string;
     className?: string;
 }
 
-export function Card({link, type }: CardProps) {
-  const [title, setTitle] = useState("");
+export function Card({link, type, title }: CardProps) {
 
     useEffect(() => {
-      if (type === "website") {
-        fetchTitle(link);
-    }
         // Load Twitter widgets script
         if (type === "twitter") {
             const script = document.createElement("script");
@@ -37,17 +30,6 @@ export function Card({link, type }: CardProps) {
         return (match && match[2].length === 11) ? match[2] : null;
     };
 
-    const fetchTitle = async (url: string) => {
-      try {
-          const response = await fetch(url);
-          const html = await response.text();
-          const doc = new DOMParser().parseFromString(html, "text/html");
-          const pageTitle = doc.querySelector("title")?.innerText || new URL(url).hostname;
-          setTitle(pageTitle);
-      } catch (error) {
-          setTitle(new URL(url).hostname);
-      }
-  };
 
     return (
 
@@ -84,7 +66,7 @@ export function Card({link, type }: CardProps) {
 
     <a href={link} target="_blank" rel="noopener noreferrer">
       <div className="flex items-center gap-3 p-4 justify-between z-20">
-        <div className="flex flex-col">
+        <div className="flex flex-col overflow-hidden">
           <span className="text-white font-medium truncate">{title}</span>
           <span className="text-gray-400 text-sm truncate">{new URL(link).hostname}</span>
         </div>

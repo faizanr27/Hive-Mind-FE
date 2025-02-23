@@ -43,7 +43,7 @@ export function Dashboard() {
               <Masonry columns={{ xs: 1, sm: 2, md: 3, lg: 4 }} spacing={3}>
                 {filteredContents.map((item) => (
                   <div key={item._id} style={{ minHeight: "100px" }}>
-                    <Card type={item.type} link={item.link} />
+                    <Card type={item.type} link={item.link} title={item.title} />
 
                   </div>
                 ))}
